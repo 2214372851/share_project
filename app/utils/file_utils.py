@@ -12,18 +12,18 @@ from app.core.config import settings
 from app.models.schemas import ProjectMetadata
 
 
-async def save_upload_file(upload_file: UploadFile, project_name: str) -> Path:
+async def save_upload_file(upload_file: UploadFile, temp_filename: str) -> Path:
     """
     保存上传的文件到临时目录
     
     Args:
         upload_file: 上传的文件对象
-        project_name: 项目名称
+        temp_filename: 临时文件名（不包含扩展名）
     
     Returns:
         保存的文件路径
     """
-    temp_file_path = settings.DATA_TMP_DIR / f"{project_name}.zip"
+    temp_file_path = settings.DATA_TMP_DIR / f"{temp_filename}.zip"
     
     # 确保目录存在
     temp_file_path.parent.mkdir(parents=True, exist_ok=True)
