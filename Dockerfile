@@ -34,7 +34,8 @@ ENV PYTHONPATH=/app/deps \
     DOMAIN=http://localhost:8000 \
     MAX_FILE_SIZE=5242880 \
     VERIFICATION_CACHE_FILE=verification_cache.json \
-    VERIFICATION_EXPIRY_MINUTES=10
+    VERIFICATION_EXPIRY_MINUTES=10 \
+    DEBUG=false
 
 # 复制依赖和项目文件
 COPY --from=builder /build/deps ./deps

@@ -22,8 +22,9 @@ app = FastAPI(
     title=settings.PROJECT_NAME,
     description="一个用于共享静态Web项目的服务",
     version="0.1.0",
-    docs_url="/docs",
-    redoc_url="/redoc",
+    # 只在DEBUG模式下启用API文档
+    docs_url="/docs" if settings.DEBUG else None,
+    redoc_url="/redoc" if settings.DEBUG else None,
 )
 
 # 配置CORS
@@ -45,7 +46,8 @@ async def root():
     API根路径
     """
     return {
-        "message": "欢迎使用Share Project API"
+        "message": "欢迎使用Share Project API",
+        "docs": "/docs" if settings.DEBUG else "API文档在生产环境中已禁用"
     }
 
 

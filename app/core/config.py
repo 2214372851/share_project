@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "Share Project"
     API_V1_STR: str = "/api/v1"
     
+    # 调试模式
+    DEBUG: bool = False
+    
     # 文件存储路径
     DATA_DIR: Path = Path("./data")
     DATA_TMP_DIR: Path = Path("./data-tmp")
@@ -27,14 +30,14 @@ class Settings(BaseSettings):
     VERIFICATION_EXPIRY_MINUTES: int = 10
     
     # 邮件设置
-    MAIL_USERNAME: Optional[str] = ''
-    MAIL_PASSWORD: Optional[str] = ''
-    MAIL_FROM: Optional[EmailStr] = ''
-    MAIL_PORT: Optional[int] = 465
-    MAIL_SERVER: Optional[str] = ''
-    MAIL_FROM_NAME: Optional[str] = ''
-    MAIL_TLS: bool = True
-    MAIL_SSL: bool = False
+    MAIL_USERNAME: Optional[str] = None
+    MAIL_PASSWORD: Optional[str] = None
+    MAIL_FROM: Optional[EmailStr] = None
+    MAIL_PORT: Optional[int] = 587
+    MAIL_SERVER: Optional[str] = None
+    MAIL_FROM_NAME: Optional[str] = None
+    MAIL_TLS: bool = True  # 启用STARTTLS
+    MAIL_SSL: bool = False  # 禁用SSL/TLS，与STARTTLS互斥
     
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", case_sensitive=True)
 
