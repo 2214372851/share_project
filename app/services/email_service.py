@@ -10,6 +10,7 @@ from typing import Optional
 from pydantic import EmailStr
 
 from app.core.config import settings
+from app.services.template import email_template
 
 # 配置日志
 logger = logging.getLogger(__name__)
@@ -35,21 +36,13 @@ async def send_verification_email(
     subject = f"验证您的项目: {project_name}"
     
     # 邮件内容
-    html_content = f"""
-    <html>
-    <body>
-        <h2>项目验证</h2>
-        <p>您好，</p>
-        <p>感谢您上传项目 <strong>{project_name}</strong>。</p>
-        <p>请确保你的网页符合法律法规</p>
-        <p>验证密钥为：</p>
-        <p>{token}</p>
-        <p>此链接将在 {settings.VERIFICATION_EXPIRY_MINUTES} 分钟后过期。</p>
-        <p>谢谢！</p>
-        <p>{settings.MAIL_FROM_NAME} 团队</p>
-    </body>
-    </html>
-    """
+    html_content = email_template.substitute(
+    project_name=project_name,
+    token=token,
+    expiry_minutes=settings.VERIFICATION_EXPIRY_MINUTES,
+    mail_from_name=settings.MAIL_FROM_NAME
+)
+
     
     # 创建邮件消息
     message = MIMEMultipart("alternative")
