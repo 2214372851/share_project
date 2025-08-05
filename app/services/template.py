@@ -1,35 +1,5 @@
 from string import Template
 
-email_template = Template("""
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <title>项目验证邮件</title>
-  <style>
-    body { background: #fff; color: #111; font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif; margin: 0; padding: 0; }
-    .container { max-width: 500px; margin: 40px auto; background: #fff; border: 1px solid #ddd; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 36px 32px 28px 32px; }
-    h2 { border-left: 4px solid #111; padding-left: 10px; margin-bottom: 28px; font-size: 1.6em; color: #111; letter-spacing: 1px; }
-    p { line-height: 1.8; margin: 14px 0; font-size: 1em; color: #222; }
-    .project-name { font-weight: bold; color: #111; background: #f5f5f5; padding: 2px 8px; border-radius: 4px; display: inline-block; }
-    .token-box { font-size: 1.3em; font-family: "Fira Mono", "Consolas", monospace; background: #111; color: #fff; padding: 8px 18px; border-radius: 8px; letter-spacing: 2px; margin: 18px 0 12px 0; display: inline-block; }
-    .footer { margin-top: 36px; color: #888; font-size: 0.95em; text-align: right; border-top: 1px solid #eee; padding-top: 16px; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>项目验证</h2>
-    <p>您好，</p>
-    <p>感谢您上传项目 <span class="project-name">$project_name</span>。</p>
-    <p>请确保你的网页符合法律法规。</p>
-    <p>验证密钥为：</p>
-    <div class="token-box">$token</div>
-    <p>此密钥将在 <strong>$expiry_minutes</strong> 分钟后过期。</p>
-    <p>谢谢！</p>
-    <div class="footer">
-      — $mail_from_name 团队
-    </div>
-  </div>
-</body>
-</html>
-""")
+email_template = Template(
+'<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>项目验证邮件</title><style>:root{--main-bg:#fafbfc;--card-bg:#fff;--border:#e5e7eb;--primary:#111;--muted:#888;--highlight:#f5f5f5;--token-bg:#222;--token-color:#fff;--shadow:0 4px 24px rgba(0,0,0,0.08);--radius:18px;--mobile-radius:10px;}html,body{height:100%;margin:0;padding:0;background:var(--main-bg);color:var(--primary);font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh;}body{min-height:100vh;height:100vh;display:flex;align-items:center;justify-content:center;}.container{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);padding:48px 64px 40px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;max-width:1200px;min-width:280px;width:80vw;min-height:480px;justify-content:center;}.main-content{flex:1 1 auto;display:flex;flex-direction:column;gap:0;justify-content:center;}.header{display:flex;align-items:center;justify-content:center;margin-bottom:24px;}h2{margin:0;font-size:2.2em;font-weight:600;letter-spacing:1px;color:var(--primary);text-align:center;}.main-content>p{margin:16px 0 0 0;line-height:1.7;font-size:1.15em;color:var(--primary);word-break:break-word;text-align:left;}.project-name{background:var(--highlight);padding:3px 16px;border-radius:8px;font-weight:bold;color:var(--primary);margin:0 2px;word-break:break-all;font-size:1.08em;}.token-title{margin-top:32px;margin-bottom:8px;font-weight:500;letter-spacing:1px;color:var(--primary);font-size:1.15em;text-align:center;}.token-box{background:var(--token-bg);color:var(--token-color);font-family:"Fira Mono","Consolas",monospace;font-size:1.6em;padding:18px 28px;border-radius:12px;word-break:break-all;white-space:pre-wrap;overflow-wrap:break-word;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);letter-spacing:2.5px;text-align:center;max-width:100%;transition:background 0.2s;user-select:all;}.expiry{color:var(--muted);font-size:1.08em;margin-bottom:8px;text-align:center;}.divider{border:none;border-top:1px solid var(--border);margin:24px 0 0 0;display:block;}.footer{color:var(--muted);font-size:1.1em;text-align:center;margin-top:16px;letter-spacing:0.5px;}@media (max-width:900px){.container{max-width:700px;width:92vw;padding:32px 20px 22px 20px;min-height:320px;}h2{font-size:1.4em;}.token-box{font-size:1.1em;padding:12px 12px;}}@media (max-width:600px){html,body{height:100%;min-height:100vh;}body{min-height:100vh;margin:0;padding:0;display:block;}.container{max-width:100vw;width:100vw;min-height:100vh;height:100vh;margin:0;padding:18px 4vw 0 4vw;border-radius:0;display:flex;flex-direction:column;gap:0;justify-content:flex-start;}.main-content{flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-start;}.footer{margin-top:auto;padding-bottom:12px;font-size:0.98em;}h2{font-size:1em;}.token-box{font-size:0.93em;padding:9px 4px;}.divider{display:none;}.expiry{margin-bottom:16px;}}@media (max-width:400px){.container{padding:10px 1vw 0 1vw;}h2{font-size:0.92em;}}.token-box:active,.token-box:focus{background:#444;outline:none;}</style></head><body><div class="container"><div class="main-content"><div class="header"><h2>项目验证</h2></div><p>您好，</p><p>感谢您上传项目 <span class="project-name">$project_name</span>。</p><p>请确保你的网页符合法律法规。</p><div class="token-title">验证密钥</div><div class="token-box" tabindex="0">$token</div><div class="expiry">此密钥将在 <strong>$expiry_minutes</strong> 分钟后过期</div><hr class="divider"/></div><div class="footer">$mail_from_name</div></div></body></html>'
+)
